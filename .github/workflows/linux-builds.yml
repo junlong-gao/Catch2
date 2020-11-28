@@ -19,12 +19,15 @@ jobs:
 #          - clang++-10
         build_type: [Debug, Release]
         std: [14]
+        include:
+          - cxx: g++-6
+            other_pkgs: g++-6
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Prepare environment
-      run: sudo apt install ninja-build
+      run: sudo apt install ninja-build ${{matrix.other_pkgs}}
 
     - name: Configure build
       working-directory: ${{runner.workspace}}
